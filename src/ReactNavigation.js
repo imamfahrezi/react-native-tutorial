@@ -12,7 +12,6 @@ export default function ReactNavigation({navigation}) {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Details" component={DetailsScreen} />
-        <Stack.Screen name="Profiles" component={ProfilesScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -24,14 +23,15 @@ function HomeScreen({navigation}) {
     <View style={styles.container}>
       <Text>Home Screen</Text>
       <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
-
-      <Button
-        color="red"
-        title="Go to Profile"
-        onPress={() => navigation.navigate('Profiles')}
+        title="Kirim Data"
+        color="green"
+        onPress={() =>
+          /* 1. Navigate to the Details route with params */
+          navigation.navigate('Details', {
+            itemId: 11,
+            otherParam: 'konsep koding tempat belajar',
+          })
+        }
       />
     </View>
   );
@@ -39,40 +39,16 @@ function HomeScreen({navigation}) {
 
 // Screen Detail
 function DetailsScreen({route, navigation}) {
+  const {itemId} = route.params;
+  const {otherParam} = route.params;
+  const {name} = route.params;
   return (
     <View style={styles.container}>
       <Text>Details Screen</Text>
-      <Button
-        title="Go to Details... again"
-        onPress={() => navigation.push('Details')}
-      />
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
-
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-      <Button
-        title="Go back to first screen in stack"
-        onPress={() => navigation.popToTop()}
-      />
-    </View>
-  );
-}
-
-// Screen Profile
-function ProfilesScreen({route, navigation}) {
-  return (
-    <View style={styles.container}>
-      <Text>Profile Screen</Text>
-      <Button
-        color="black"
-        title="Go to Home"
-        onPress={() => navigation.navigate('Home')}
-      />
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-      <Button
-        color="green"
-        title="Go back to first screen in stack"
-        onPress={() => navigation.popToTop()}
-      />
+      <Text>itemId: {JSON.stringify(itemId)}</Text>
+      <Text>otherParam: {JSON.stringify(otherParam)}</Text>
+      <Text>name: {JSON.stringify(name)}</Text>
+      <Button title="Go back" onPress={() => navigation.goBack()} color="red" />
     </View>
   );
 }
