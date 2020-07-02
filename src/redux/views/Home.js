@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, Button} from 'react-native';
 import {connect} from 'react-redux';
 
 class Home extends Component {
@@ -7,6 +7,10 @@ class Home extends Component {
     return (
       <View>
         <Text> {this.props.login} </Text>
+        <Button
+          title="thunk"
+          onPress={() => this.props.navigation.navigate('ThunkExample')}
+        />
       </View>
     );
   }

@@ -1,6 +1,6 @@
 import {LOGIN} from '../action/types';
 
-export default (login = 'NULL', action) => {
+export default (login = '', action) => {
   switch (action.type) {
     case LOGIN:
       return action.payload;
